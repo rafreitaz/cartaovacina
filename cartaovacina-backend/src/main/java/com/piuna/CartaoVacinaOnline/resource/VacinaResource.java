@@ -29,4 +29,5 @@ public class VacinaResource {
     public List<Vacina> getAll(){
         return vacinaRepository.findAll();
     }
+
 }
