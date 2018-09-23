@@ -29,6 +29,10 @@ public class Vacina {
         this.nome = nome;
     }
 
+    public Vacina() {
+        //Construtor vazio
+    }
+
     public Long getId() {
         return id;
     }
