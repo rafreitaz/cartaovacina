@@ -6,6 +6,7 @@ package com.piuna.CartaoVacinaOnline.resource;
 
 import com.piuna.CartaoVacinaOnline.domain.Vacina;
 import com.piuna.CartaoVacinaOnline.repository.VacinaRepository;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,7 @@ public class VacinaResource {
      * @return uma lista de todas as vacinas
      */
     @GetMapping("/vacinas") //Aqui definimos como o frontEnd acessa o método. Chamando a url /vacinas o backEnd chama o método aqui.
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Vacina> getAll(){
         return vacinaRepository.findAll();
     }
