@@ -13,8 +13,8 @@ export class VacinaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.vacinaService.getAll().subscribe(data => {
-      this.vacinas = data;
+    this.vacinaService.getAll().subscribe(res => {
+      this.vacinas = res;
     })
   }
 

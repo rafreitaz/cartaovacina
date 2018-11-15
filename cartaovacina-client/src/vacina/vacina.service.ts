@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
+import {Vacina} from "./vacina.model";
 
 @Injectable()
 export class VacinaService {
@@ -15,20 +16,20 @@ export class VacinaService {
   }
 
   findOne(id: number){
-    return this.http.get(this.VACINA_API + '/' + id)
+    return this.http.get(`${this.VACINA_API}/${id}`)
   }
 
-  save(vacina: any): Observable<any> {
+  save(vacina: Vacina): Observable<any> {
     let result: Observable<Object>;
     if (vacina['id']) {
-      result = this.http.put(vacina.id, vacina);
+      result = this.http.put(this.VACINA_API, vacina);
     } else {
       result = this.http.post(this.VACINA_API, vacina);
     }
     return result;
   }
 
-  delete(id: string){
-    return this.http.delete(id);
+  delete(id: number){
+    return this.http.delete(`${this.VACINA_API}/${id}`);
   }
 }

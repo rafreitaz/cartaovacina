@@ -3,6 +3,7 @@ import {Subscription} from "rxjs/internal/Subscription";
 import {ActivatedRoute, Router} from "@angular/router";
 import {VacinaService} from "./vacina.service";
 import {NgForm} from "@angular/forms";
+import {Vacina} from "./vacina.model";
 
 @Component({
   selector: 'app-vacina-edit',
@@ -10,7 +11,7 @@ import {NgForm} from "@angular/forms";
 })
 export class VacinaEditComponent implements OnInit, OnDestroy {
 
-  vacina: any = {};
+  vacina: Vacina = new Vacina;
 
   sub: Subscription;
 
@@ -45,13 +46,13 @@ export class VacinaEditComponent implements OnInit, OnDestroy {
   }
 
   save(form: NgForm) {
-    this.vacinaService.save(form).subscribe(result => {
+    this.vacinaService.save(this.vacina).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }
 
-  remove(id) {
-    this.vacinaService.delete(id).subscribe(result => {
+  delete() {
+    this.vacinaService.delete(this.vacina.id).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }

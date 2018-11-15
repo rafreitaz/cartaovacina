@@ -13,8 +13,8 @@
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit"
               [disabled]="!vacinaForm.valid">Salvar</button>
-      <button mat-raised-button color="secondary" (click)="remove(car.href)"
-              *ngIf="vacina.id" type="button">Deletar</button>
+      <button mat-raised-button color="secondary" (click)="delete(vacina.id)"
+              *ngIf="vacina.nome" type="button">Deletar</button>
       <a mat-button routerLink="/app-vacina">Cancelar</a>
     </mat-card-actions>
   </form>
