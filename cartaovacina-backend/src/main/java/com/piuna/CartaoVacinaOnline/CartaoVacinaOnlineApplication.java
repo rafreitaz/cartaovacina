@@ -19,12 +19,12 @@ public class CartaoVacinaOnlineApplication {
 	@Bean
 	ApplicationRunner init(VacinaRepository repository) {
 		return args -> {
-			Stream.of("BCG", "Hepatite B", "Pentavalente", "Poliomielite", "Meningocócica C",
-					"Tríplice Viral", "Febre Amarela").forEach(name -> {
-				Vacina vacina = new Vacina();
-				vacina.setNome(name);
-				repository.save(vacina);
-			});
+//			Stream.of("BCG", "Hepatite B", "Pentavalente", "Poliomielite", "Meningocócica C",
+//					"Tríplice Viral", "Febre Amarela").forEach(name -> {
+//				Vacina vacina = new Vacina();
+//				vacina.setNome(name);
+//				repository.save(vacina);
+//			});
 			repository.findAll().forEach(System.out::println);
 		};
 	}
