@@ -1,0 +1,21 @@
+<mat-card>
+  <form #vacinaForm="ngForm" (ngSubmit)="save(vacinaForm.value)">
+    <mat-card-header>
+      <mat-card-title><h2>{{vacina.nome ? 'Editar' : 'Adicionar'}} Vacina</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input type="hidden" name="id" [(ngModel)]="vacina.id">
+      <mat-form-field>
+        <input matInput placeholder="Nome da Vacina" [(ngModel)]="vacina.nome"
+               required name="nome" #nome>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!vacinaForm.valid">Salvar</button>
+      <button mat-raised-button color="secondary" (click)="delete(vacina.id)"
+              *ngIf="vacina.nome" type="button">Deletar</button>
+      <a mat-button routerLink="/app-vacina">Cancelar</a>
+    </mat-card-actions>
+  </form>
+</mat-card>

@@ -7,26 +7,35 @@ package com.piuna.CartaoVacinaOnline.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.hibernate.id.IncrementGenerator;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity  //Define a classe como uma entidade, ou seja, representada por uma tabela no banco (vamos colocar qual depois)
-@EqualsAndHashCode  //Gera os métodos equals() e hashcode() utilizados pelos arquivos de configuração
-@ToString  //Gera o método toString() que basicamente transforma o objeto em uma string com os atributos, tb usado pela configuração
+@Entity
+@EqualsAndHashCode
+@ToString
+@Table(name = "TBL_VACINA")
 public class Vacina {
 
-    @Id  //É sempre necessário identificar o ID da entidade para fazer o mapeamento do banco
-    @GeneratedValue  //Autoexplicativo
+    @Id
+    @GeneratedValue
+    @Column(name = "ID_VACINA")
     private Long id;
 
+    @Column(name = "NOME")
     private String nome;
 
-    //Construtor
     public Vacina(Long id, String nome) {
         this.id = id;
         this.nome = nome;
+    }
+
+    public Vacina() {
+        //Construtor vazio
     }
 
     public Long getId() {

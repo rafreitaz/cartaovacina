@@ -12,9 +12,11 @@
 
 ### IntelliJ IDEA ###
 .idea
+/.idea/
 *.iws
 *.iml
 *.ipr
+.idea/workspace.xml
 
 ### NetBeans ###
 /nbproject/private/
