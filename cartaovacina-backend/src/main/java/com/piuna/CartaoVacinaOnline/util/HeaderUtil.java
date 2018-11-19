@@ -1,4 +1,4 @@
-package com.piuna.CartaoVacinaOnline.Util;
+package com.piuna.CartaoVacinaOnline.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

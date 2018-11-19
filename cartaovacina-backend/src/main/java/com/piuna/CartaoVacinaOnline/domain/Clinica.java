@@ -1,13 +1,7 @@
 package com.piuna.CartaoVacinaOnline.domain;
 
-/**
- * NOTA: Todos os objetos comuns que usaremos ficarão no pacote "domain"
- * Para maior organização vamos utilizar um pacote diferente pra cada tipo de objeto
- */
-
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.hibernate.id.IncrementGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,27 +10,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Entity
 @EqualsAndHashCode
 @ToString
-@Table(name = "TBL_VACINA")
-public class Vacina {
+@Entity
+@Table(name = "TBL_CLINICA")
+public class Clinica {
 
-    @Id
     @GeneratedValue
-    @Column(name = "ID_VACINA")
+    @Id
+    @Column(name = "ID_CLINICA")
     private Long id;
 
     @NotNull
-    @Column(name = "NOME_VACINA")
+    @Column(name = "NOME_CLINICA")
     private String nome;
 
-    public Vacina(Long id, String nome) {
-        this.id = id;
+    @NotNull
+    @Column(name = "NU_CNPJ")
+    private String cnpj;
+
+    public Clinica(@NotNull String nome, @NotNull String cnpj) {
         this.nome = nome;
+        this.cnpj = cnpj;
     }
 
-    public Vacina() {
+    public Clinica() {
         //Construtor vazio
     }
 
@@ -54,5 +52,13 @@ public class Vacina {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 }
