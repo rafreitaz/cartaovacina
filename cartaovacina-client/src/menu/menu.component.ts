@@ -8,6 +8,7 @@ import {MenuItem} from "primeng/api";
 export class MenuComponent implements OnInit {
 
   items: MenuItem[];
+  clickevent: any;
 
   constructor() {
   }
@@ -15,15 +16,37 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {
-        label: 'Vacinas', icon: 'pi pi-pw pi-file',
+        label: 'ADM', icon: 'pi pi-pw pi-user',
         items: [{
-          label: 'Cadastrar', icon: 'pi pi-fw pi-plus',
+          label: 'Vacinas', icon: 'pi pi-fw pi-filter', routerLink: ['/app-vacina'],
         },
         {
-          label: 'Visualizar', icon: 'pi pi-fw pi-external-link'
+          label: 'Clínicas', icon: 'pi pi-fw pi-home'
+        },
+        ]
+      },
+      {
+        label: 'Usuários', icon: 'pi pi-pw pi-users',
+        items: [{
+          label: 'Cadastrar', icon: 'pi pi-fw pi-user-plus',
+        },
+          {
+            label: 'Vizualizar cartão', icon: 'pi pi-fw pi-list'
+          },
+        ]
+      },
+      {
+        label: 'Clínica', icon: 'pi pi-pw pi-home',
+        items: [{
+          label: 'Cadastrar aplicação de vacina', icon: 'pi pi-fw pi-calendar-plus',
         },
         ]
       },
     ];
   }
+
+  click(event) {
+    this.clickevent = event.item.label;
+  }
+
 }

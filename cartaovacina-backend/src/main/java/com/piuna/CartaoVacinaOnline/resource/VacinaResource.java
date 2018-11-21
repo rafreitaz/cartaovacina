@@ -4,10 +4,9 @@ package com.piuna.CartaoVacinaOnline.resource;
  * Resources são classes que recebem a chamada do frontEnd e executam algum metodo.
  */
 
+import com.piuna.CartaoVacinaOnline.domain.Vacina;
 import com.piuna.CartaoVacinaOnline.service.VacinaService;
 import com.piuna.CartaoVacinaOnline.util.HeaderUtil;
-import com.piuna.CartaoVacinaOnline.domain.Vacina;
-import com.piuna.CartaoVacinaOnline.repository.VacinaRepository;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

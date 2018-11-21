@@ -3,9 +3,14 @@ import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {VacinaEditComponent} from "../vacina/vacina-edit.component";
 import {VacinaComponent} from "../vacina/vacina.component";
+import {MenuComponent} from "../menu/menu.component";
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/app-vacina', pathMatch: 'full' },
+  { path: '', redirectTo: '/app-menu', pathMatch: 'full' },
+  {
+    path: 'app-menu',
+    component: MenuComponent
+  },
   {
     path: 'app-vacina',
     component: VacinaComponent

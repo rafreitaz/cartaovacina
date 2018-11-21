@@ -8,6 +8,7 @@ import {VacinaModule} from "../vacina/vacina.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule} from "@angular/material";
 import { AppRoutingModule } from './app-routing.module';
+import {MenuVacinaModule} from "../menu/menu-vacina.module";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AppRoutingModule } from './app-routing.module';
     MatInputModule,
     MatListModule,
     MatToolbarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MenuVacinaModule
   ],
   providers: [VacinaService],
   bootstrap: [AppComponent]

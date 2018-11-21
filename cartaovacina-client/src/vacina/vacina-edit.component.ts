@@ -30,7 +30,7 @@ export class VacinaEditComponent implements OnInit, OnDestroy {
             this.vacina.id = vacina.id;
           } else {
             console.log(`Vacina with id '${id}' not found, returning to list`);
-            this.gotoList();
+            this.goToList();
           }
         });
       }
@@ -41,19 +41,19 @@ export class VacinaEditComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  gotoList() {
+  goToList() {
     this.router.navigate(['/app-vacina']);
   }
 
   save(form: NgForm) {
     this.vacinaService.save(this.vacina).subscribe(result => {
-      this.gotoList();
+      this.goToList();
     }, error => console.error(error));
   }
 
   delete() {
     this.vacinaService.delete(this.vacina.id).subscribe(result => {
-      this.gotoList();
+      this.goToList();
     }, error => console.error(error));
   }
 }

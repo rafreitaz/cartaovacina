@@ -2,6 +2,25 @@
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 
 body {
-  margin: 0;
+  margin: 0.3em;
   font-family: Roboto, sans-serif;
+}
+
+.top-toolbar {
+  padding: 1em;
+  background-color: #1e1eff;
+  color: white;
+  font-weight: bold;
+}
+
+.ui-m {
+  padding: 1em;
+}
+
+.ui-button.ui-state-default.ui-button-info {
+  margin: 2px;
+}
+
+.ui-card-header {
+  padding-left: 1em;
 }

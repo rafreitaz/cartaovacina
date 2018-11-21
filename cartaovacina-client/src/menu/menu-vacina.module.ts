@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu.component';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {MenuItem} from 'primeng/api';
+import {ButtonModule} from "primeng/button";
 
 @NgModule({
   imports: [
     CommonModule,
-    PanelMenuModule
+    PanelMenuModule,
+    ButtonModule
   ],
   declarations: [MenuComponent]
 })
-export class MenuModule { }
+export class MenuVacinaModule { }
