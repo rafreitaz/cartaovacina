@@ -29,9 +29,13 @@ public class Usuario {
     @Column(name = "NU_CPF")
     private String cpf;
 
-    public Usuario(@NotNull String nome, @NotNull String cpf) {
+    @Column(name = "EMAIL")
+    private String email;
+
+    public Usuario(String nome, String cpf, String email) {
         this.nome = nome;
         this.cpf = cpf;
+        this.email = email;
     }
 
     public Usuario() {
@@ -60,5 +64,13 @@ public class Usuario {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

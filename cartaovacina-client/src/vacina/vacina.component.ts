@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {VacinaService} from "./vacina.service";
 import {Vacina} from "./vacina.model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Observable} from "rxjs";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-vacina',
@@ -14,13 +16,13 @@ export class VacinaComponent implements OnInit {
   cols: any[];
 
   constructor(private vacinaService: VacinaService,
-              private router: Router) {
+              private router: Router,
+              private toastService: ToastrService
+  ) {
   }
 
   ngOnInit() {
-    this.vacinaService.getAll().subscribe(res => {
-      this.vacinas = res;
-    });
+    this.updateListaVacinas();
 
     this.cols = [
       { field: 'id', header: 'ID' },
@@ -43,6 +45,25 @@ export class VacinaComponent implements OnInit {
 
   hasSelection() {
     return !!this.vacinaSelecionada;
+  }
+
+  delete() {
+    this.subscribeToDeleteResponse(this.vacinaService.delete(this.vacinaSelecionada.id));
+  }
+
+  private subscribeToDeleteResponse(result: Observable<any>) {
+    result.subscribe((res) => {
+      this.toastService.success("Vacina excluída com sucesso!");
+      this.updateListaVacinas();
+    }, (error) => {
+      this.toastService.error("Erro ao excluir a vacina!");
+    });
+  }
+
+  updateListaVacinas() {
+    this.vacinaService.getAll().subscribe(res => {
+      this.vacinas = res;
+    });
   }
 
 }

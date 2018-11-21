@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {VacinaService} from "./vacina.service";
 import {NgForm} from "@angular/forms";
 import {Vacina} from "./vacina.model";
+import {ToastrService} from "ngx-toastr";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-vacina-edit',
@@ -17,7 +19,9 @@ export class VacinaEditComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private vacinaService: VacinaService) {
+              private vacinaService: VacinaService,
+              private toastService: ToastrService
+  ) {
   }
 
   ngOnInit() {
@@ -46,14 +50,13 @@ export class VacinaEditComponent implements OnInit, OnDestroy {
   }
 
   save(form: NgForm) {
+    if (!form.valid) {
+      this.toastService.error("Todos os campos devem ser preenchidos!");
+      return;
+    }
     this.vacinaService.save(this.vacina).subscribe(result => {
+      this.toastService.success("Vacina salva com sucesso!");
       this.goToList();
-    }, error => console.error(error));
-  }
-
-  delete() {
-    this.vacinaService.delete(this.vacina.id).subscribe(result => {
-      this.goToList();
-    }, error => console.error(error));
+    }, error => this.toastService.error("Erro ao salvar a vacina!"));
   }
 }

@@ -28,7 +28,7 @@ export class MenuComponent implements OnInit {
       {
         label: 'Usuários', icon: 'pi pi-pw pi-users',
         items: [{
-          label: 'Cadastrar', icon: 'pi pi-fw pi-user-plus',
+          label: 'Cadastrar', icon: 'pi pi-fw pi-user-plus', routerLink: ['/app-usuario-edit'],
         },
           {
             label: 'Vizualizar cartão', icon: 'pi pi-fw pi-list'

@@ -1,5 +1,5 @@
 <div class="ui-card">
-  <form #vacinaForm="ngForm" (ngSubmit)="save(vacinaForm.value)">
+  <form #vacinaForm="ngForm" (ngSubmit)="save(vacinaForm)">
 
     <div class="ui-card-header">
       <h2>{{vacina.id? 'Editar Vacina' : 'Cadastrar Vacina'}}</h2>
@@ -10,14 +10,13 @@
       <div class="ui-m">
         <span class="ui-float-label">
           <input id="float-input" type="text" size="30" [(ngModel)]="vacina.nome"
-                 name="nomevacina" pInputText>
+                 name="nomevacina" pInputText required>
           <label for="float-input">Nome da Vacina</label>
         </span>
       </div>
 
       <div class="ui-m">
         <p-button label="Salvar" styleClass="ui-button-info" type="submit"></p-button>
-        <p-button *ngIf="vacina.id" label="Excluir" styleClass="ui-button-info" (onClick)="delete()"></p-button>
         <p-button label="Cancelar" styleClass="ui-button-info" (onClick)="goToList()"></p-button>
       </div>
     </div>

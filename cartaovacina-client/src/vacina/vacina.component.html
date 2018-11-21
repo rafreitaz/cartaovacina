@@ -28,7 +28,8 @@
 
   <div class="ui-m">
     <p-button label="Cadastrar" styleClass="ui-button-info" (onClick)="cadastrar()"></p-button>
-    <p-button label="Editar" styleClass="ui-button-info" (onClick)="editar()" [disabled]="!hasSelection()"></p-button>
+    <p-button label="Editar" styleClass="ui-button-success" (onClick)="editar()" [disabled]="!hasSelection()"></p-button>
+    <p-button label="Excluir" styleClass="ui-button-danger" (onClick)="delete()" [disabled]="!hasSelection()"></p-button>
     <p-button label="Voltar" styleClass="ui-button-info" (onClick)="voltarMenu()"></p-button>
   </div>
 

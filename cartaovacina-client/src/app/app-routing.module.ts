@@ -4,6 +4,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {VacinaEditComponent} from "../vacina/vacina-edit.component";
 import {VacinaComponent} from "../vacina/vacina.component";
 import {MenuComponent} from "../menu/menu.component";
+import {UsuarioEditComponent} from "../usuario/usuario-edit.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/app-menu', pathMatch: 'full' },
@@ -22,6 +23,10 @@ const appRoutes: Routes = [
   {
     path: 'app-vacina-edit/:id',
     component: VacinaEditComponent
+  },
+  {
+    path: 'app-usuario-edit',
+    component: UsuarioEditComponent
   }
 ];
 

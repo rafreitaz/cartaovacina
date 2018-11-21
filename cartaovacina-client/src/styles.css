@@ -21,6 +21,20 @@ body {
   margin: 2px;
 }
 
+.ui-button.ui-state-default.ui-button-success {
+  margin: 2px;
+}
+
+.ui-button.ui-state-default.ui-button-danger {
+  margin: 2px;
+}
+
 .ui-card-header {
   padding-left: 1em;
+}
+
+.ui-input-m {
+  padding: 1em;
+  margin-right: 1em;
+  margin-left: 1em;
 }
