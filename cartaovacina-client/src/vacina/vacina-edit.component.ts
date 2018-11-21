@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {VacinaService} from "./vacina.service";
 import {NgForm} from "@angular/forms";
 import {Vacina} from "./vacina.model";
+import {ToastrService} from "ngx-toastr";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-vacina-edit',
@@ -17,7 +19,9 @@ export class VacinaEditComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private vacinaService: VacinaService) {
+              private vacinaService: VacinaService,
+              private toastService: ToastrService
+  ) {
   }
 
   ngOnInit() {
@@ -30,7 +34,7 @@ export class VacinaEditComponent implements OnInit, OnDestroy {
             this.vacina.id = vacina.id;
           } else {
             console.log(`Vacina with id '${id}' not found, returning to list`);
-            this.gotoList();
+            this.goToList();
           }
         });
       }
@@ -41,19 +45,18 @@ export class VacinaEditComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  gotoList() {
+  goToList() {
     this.router.navigate(['/app-vacina']);
   }
 
   save(form: NgForm) {
+    if (!form.valid) {
+      this.toastService.error("Todos os campos devem ser preenchidos!");
+      return;
+    }
     this.vacinaService.save(this.vacina).subscribe(result => {
-      this.gotoList();
-    }, error => console.error(error));
-  }
-
-  delete() {
-    this.vacinaService.delete(this.vacina.id).subscribe(result => {
-      this.gotoList();
-    }, error => console.error(error));
+      this.toastService.success("Vacina salva com sucesso!");
+      this.goToList();
+    }, error => this.toastService.error("Erro ao salvar a vacina!"));
   }
 }

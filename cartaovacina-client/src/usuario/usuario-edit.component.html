@@ -1,0 +1,42 @@
+<div class="ui-card">
+  <form #usuarioForm="ngForm" (ngSubmit)="save(usuarioForm)">
+
+    <div class="ui-card-header">
+      <h2>{{usuario.id? 'Editar Usuário' : 'Cadastrar Usuário'}}</h2>
+    </div>
+
+    <div class="ui-card-body">
+
+      <div class="ui-input-m">
+        <span class="ui-float-label">
+          <input id="nome" type="text" maxlength="150" size="65" [(ngModel)]="usuario.nome"
+                 name="nomeusuario" pInputText required>
+          <label for="nome">Nome</label>
+        </span>
+      </div>
+
+      <div class="ui-input-m">
+        <span class="ui-float-label">
+          <p-inputMask id="cpf" type="text" maxlength="15" [(ngModel)]="usuario.cpf"
+                       name="cpfusuario" mask="999.999.999-99" required></p-inputMask>
+          <label for="cpf">CPF</label>
+        </span>
+      </div>
+
+      <div class="ui-input-m">
+        <span class="ui-float-label">
+          <input id="email" type="email" maxlength="150" size="65" [(ngModel)]="usuario.email"
+                 name="emailusuario" pInputText email="true" required>
+          <label for="nome">E-mail</label>
+        </span>
+      </div>
+
+      <div class="ui-m">
+        <p-button label="Salvar" styleClass="ui-button-info" type="submit"></p-button>
+        <p-button label="Cancelar" styleClass="ui-button-info" (onClick)="goToList()"></p-button>
+      </div>
+
+    </div>
+
+  </form>
+</div>

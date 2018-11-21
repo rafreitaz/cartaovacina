@@ -4,15 +4,14 @@ package com.piuna.CartaoVacinaOnline.resource;
  * Resources são classes que recebem a chamada do frontEnd e executam algum metodo.
  */
 
-import com.piuna.CartaoVacinaOnline.Util.HeaderUtil;
 import com.piuna.CartaoVacinaOnline.domain.Vacina;
-import com.piuna.CartaoVacinaOnline.repository.VacinaRepository;
+import com.piuna.CartaoVacinaOnline.service.VacinaService;
+import com.piuna.CartaoVacinaOnline.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -27,10 +26,10 @@ import java.util.Optional;
 @RestController
 public class VacinaResource {
 
-    private final VacinaRepository vacinaRepository;
+    private final VacinaService vacinaService;
 
-    public VacinaResource(VacinaRepository vacinaRepository) {
-        this.vacinaRepository = vacinaRepository;
+    public VacinaResource(VacinaService vacinaService) {
+        this.vacinaService = vacinaService;
     }
 
     /**
@@ -41,7 +40,7 @@ public class VacinaResource {
     @GetMapping("/vacinas") //Aqui definimos como o frontEnd acessa o método. Chamando a url /vacinas o backEnd chama o método aqui.
     @CrossOrigin(origins = "http://localhost:4200")
     public List<Vacina> getAll(){
-        return vacinaRepository.findAll();
+        return vacinaService.getAll();
     }
 
     @PutMapping("/vacinas")
@@ -51,7 +50,7 @@ public class VacinaResource {
         if (vacina.getId() == null) {
             return createVacina(vacina);
         }
-        Vacina result = vacinaRepository.save(vacina);
+        Vacina result = vacinaService.save(vacina);
         return ResponseEntity.ok()
                 .headers(HeaderUtil.createEntityUpdateAlert("Vacina", vacina.getId().toString()))
                 .body(result);
@@ -64,7 +63,7 @@ public class VacinaResource {
         if (vacina.getId() != null) {
             throw new Exception("Já existe vacina com o id informado!");
         }
-        Vacina result = vacinaRepository.save(vacina);
+        Vacina result = vacinaService.save(vacina);
         return ResponseEntity.created(new URI("/api/cargos/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert("Vacina", result.getId().toString()))
                 .body(result);
@@ -73,15 +72,14 @@ public class VacinaResource {
     @DeleteMapping("/vacinas/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Vacina> createVacina(@PathVariable("id") Long id) {
-        Vacina result = vacinaRepository.recuperaPeloId(id);
-        vacinaRepository.delete(result);
+        this.vacinaService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("Vacina", id.toString())).build();
     }
 
     @GetMapping("vacinas/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Vacina> findOne(@PathVariable("id") Long id) {
-        Vacina result = vacinaRepository.recuperaPeloId(id);
+        Vacina result = vacinaService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 

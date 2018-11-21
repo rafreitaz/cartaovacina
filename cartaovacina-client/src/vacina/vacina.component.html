@@ -1,14 +1,36 @@
-<mat-card>
-  <mat-card-header>Lista de Vacinas</mat-card-header>
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let vacina of vacinas">
-        <h3 mat-line>
-          <a mat-button [routerLink]="['/app-vacina-edit', vacina.id]">{{vacina.nome}}</a>
-        </h3>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
+<div class="ui-card">
 
-  <button mat-fab color="primary" [routerLink]="['/app-vacina-add']">Adic.</button>
-</mat-card>
+  <div class="ui-card-header">
+    <h2>Lista de Vacinas</h2>
+  </div>
+
+  <div class="ui-card-body">
+    <div class="ui-m" style="width: 750px">
+      <p-table [columns]="cols" [value]="vacinas" selectionMode="single"
+               [(selection)]="vacinaSelecionada" [resizableColumns]="true">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns" pResizableColumn>
+              {{col.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns" class="ui-resizable-column">
+              {{rowData[col.field]}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div class="ui-m">
+    <p-button label="Cadastrar" styleClass="ui-button-info" (onClick)="cadastrar()"></p-button>
+    <p-button label="Editar" styleClass="ui-button-success" (onClick)="editar()" [disabled]="!hasSelection()"></p-button>
+    <p-button label="Excluir" styleClass="ui-button-danger" (onClick)="delete()" [disabled]="!hasSelection()"></p-button>
+    <p-button label="Voltar" styleClass="ui-button-info" (onClick)="voltarMenu()"></p-button>
+  </div>
+
+</div>

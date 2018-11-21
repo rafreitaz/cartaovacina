@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @EqualsAndHashCode
@@ -26,7 +27,8 @@ public class Vacina {
     @Column(name = "ID_VACINA")
     private Long id;
 
-    @Column(name = "NOME")
+    @NotNull
+    @Column(name = "NOME_VACINA")
     private String nome;
 
     public Vacina(Long id, String nome) {

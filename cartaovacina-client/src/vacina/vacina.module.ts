@@ -6,6 +6,8 @@ import {MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolba
 import { VacinaEditComponent } from './vacina-edit.component';
 import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+import {ButtonModule, InputTextModule} from "primeng/primeng";
+import {TableModule} from "primeng/table";
 
 @NgModule({
   imports: [
@@ -17,7 +19,10 @@ import {FormsModule} from "@angular/forms";
     MatListModule,
     MatToolbarModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    InputTextModule,
+    ButtonModule,
+    TableModule
   ],
   exports: [VacinaComponent, VacinaEditComponent],
   declarations: [VacinaComponent, VacinaEditComponent]
