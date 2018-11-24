@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {MenuVacinaModule} from "../menu/menu-vacina.module";
 import {ToastrModule} from "ngx-toastr";
 import {UsuarioModule} from "../usuario/usuario.module";
+import {ClinicaModule} from "../clinica/clinica.module";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {UsuarioModule} from "../usuario/usuario.module";
     HttpClientModule,
     VacinaModule,
     UsuarioModule,
+    ClinicaModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,

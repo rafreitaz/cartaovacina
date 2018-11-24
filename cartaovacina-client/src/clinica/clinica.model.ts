@@ -1,13 +1,12 @@
 import {Acesso} from "../acesso/acesso.model";
 
-export class Usuario {
+export class Clinica {
 
   id: number;
   nome: string;
-  cpf: string;
+  cnpj: string;
   email: string;
   acesso: Acesso;
-
 
   constructor() {
   }

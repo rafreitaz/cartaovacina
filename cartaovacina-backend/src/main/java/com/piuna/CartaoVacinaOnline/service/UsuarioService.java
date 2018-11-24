@@ -13,7 +13,7 @@ public interface UsuarioService {
 
     Usuario recuperaPeloId(Long id);
 
-    Usuario save(Usuario usuario);
+    Usuario save(Usuario usuario) throws Exception;
 
     void delete(Long id);
 

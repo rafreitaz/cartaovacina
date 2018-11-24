@@ -1,48 +1,48 @@
 <div class="ui-card">
-  <form #usuarioForm="ngForm" (ngSubmit)="save(usuarioForm)">
+  <form #clinicaForm="ngForm" (ngSubmit)="save(clinicaForm)">
 
     <div class="ui-card-header">
-      <h2>{{usuario.id? 'Editar Usuário' : 'Cadastrar Usuário'}}</h2>
+      <h2>{{clinica.id? 'Editar Clínica' : 'Cadastrar Clinica'}}</h2>
     </div>
 
     <div class="ui-card-body">
 
       <div class="ui-input-m">
         <span class="ui-float-label">
-          <input id="nome" type="text" maxlength="150" size="65" [(ngModel)]="usuario.nome"
-                 name="nomeusuario" pInputText required>
+          <input id="nome" type="text" maxlength="150" size="65" [(ngModel)]="clinica.nome"
+                 name="nomeClinica" pInputText required>
           <label for="nome">Nome</label>
         </span>
       </div>
 
       <div class="ui-input-m">
         <span class="ui-float-label">
-          <p-inputMask id="cpf" type="text" maxlength="15" [(ngModel)]="usuario.cpf"
-                       name="cpfusuario" mask="999.999.999-99" required></p-inputMask>
-          <label for="cpf">CPF</label>
+          <p-inputMask id="cnpj" type="text" maxlength="18" [(ngModel)]="clinica.cnpj"
+                       name="cpnjClinica" mask="99.999.999/9999-99" required></p-inputMask>
+          <label for="cpf">CNPJ</label>
         </span>
       </div>
 
       <div class="ui-input-m">
         <span class="ui-float-label">
-          <input id="email" type="email" maxlength="150" size="65" [(ngModel)]="usuario.email"
-                 name="emailusuario" pInputText email="true" required>
+          <input id="email" type="email" maxlength="150" size="65" [(ngModel)]="clinica.email"
+                 name="emailClinica" pInputText email="true" required>
           <label for="nome">E-mail</label>
         </span>
       </div>
 
       <div class="ui-input-m">
         <span class="ui-float-label">
-          <input id="login" type="text" maxlength="20" [(ngModel)]="usuario.acesso.login"
-                       name="loginUsuario" required pInputText>
+          <input id="login" type="text" maxlength="20" [(ngModel)]="clinica.acesso.login"
+                       name="loginClinica" required pInputText>
           <label for="login">Login</label>
         </span>
       </div>
 
       <div class="ui-input-m">
         <span class="ui-float-label">
-          <input id="senha" type="password" maxlength="20" [(ngModel)]="usuario.acesso.senha"
-                       name="senhaUsuario" required pInputText>
+          <input id="senha" type="password" maxlength="20" [(ngModel)]="clinica.acesso.senha"
+                       name="senhaClinica" required pInputText>
           <label for="senha">Senha</label>
         </span>
       </div>

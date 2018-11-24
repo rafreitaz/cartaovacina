@@ -22,6 +22,7 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
+    "@brazilian-utils/is-valid-cnpj": "^0.1.11",
     "@brazilian-utils/is-valid-cpf": "^0.1.11",
     "core-js": "^2.5.4",
     "ng-cpf-cnpj-validate": "^1.0.2",

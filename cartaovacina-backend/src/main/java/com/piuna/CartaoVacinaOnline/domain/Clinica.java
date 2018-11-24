@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -29,9 +31,19 @@ public class Clinica {
     @Column(name = "NU_CNPJ")
     private String cnpj;
 
-    public Clinica(@NotNull String nome, @NotNull String cnpj) {
+    @Column(name = "EMAIL")
+    private String email;
+
+    @NotNull
+    @OneToOne
+    @JoinColumn(name = "ID_ACESSO")
+    private Acesso acesso;
+
+    public Clinica(String nome, String cnpj, String email, Acesso acesso) {
         this.nome = nome;
         this.cnpj = cnpj;
+        this.email = email;
+        this.acesso = acesso;
     }
 
     public Clinica() {
@@ -60,5 +72,21 @@ public class Clinica {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Acesso getAcesso() {
+        return acesso;
+    }
+
+    public void setAcesso(Acesso acesso) {
+        this.acesso = acesso;
     }
 }

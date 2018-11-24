@@ -5,6 +5,8 @@ import {VacinaEditComponent} from "../vacina/vacina-edit.component";
 import {VacinaComponent} from "../vacina/vacina.component";
 import {MenuComponent} from "../menu/menu.component";
 import {UsuarioEditComponent} from "../usuario/usuario-edit.component";
+import {ClinicaEditComponent} from "../clinica/clinica-edit.component";
+import {ClinicaComponent} from "../clinica/clinica.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/app-menu', pathMatch: 'full' },
@@ -27,6 +29,18 @@ const appRoutes: Routes = [
   {
     path: 'app-usuario-edit',
     component: UsuarioEditComponent
+  },
+  {
+    path: 'app-clinica',
+    component: ClinicaComponent
+  },
+  {
+    path: 'app-clinica-add',
+    component: ClinicaEditComponent
+  },
+  {
+    path: 'app-clinica-edit/:id',
+    component: ClinicaEditComponent
   }
 ];
 

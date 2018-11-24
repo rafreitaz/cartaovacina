@@ -6,6 +6,7 @@ import {UsuarioService} from "./usuario.service";
 import {Usuario} from "./usuario.model";
 import isValidCpf from '@brazilian-utils/is-valid-cpf';
 import {ToastrService} from "ngx-toastr";
+import {Acesso} from "../acesso/acesso.model";
 
 @Component({
   selector: 'app-usuario-edit',
@@ -36,6 +37,8 @@ export class UsuarioEditComponent implements OnInit, OnDestroy {
             this.goToList();
           }
         });
+      } else {
+        this.usuario.acesso = new Acesso();
       }
     });
   }
@@ -57,14 +60,14 @@ export class UsuarioEditComponent implements OnInit, OnDestroy {
       this.toastService.error("Todos os campos devem ser preenchidos corretamente!");
       return;
     }
-    this.usuarioService.save(this.usuario).subscribe(result => {
+    this.usuarioService.save(this.usuario).subscribe(res => {
       this.goToList();
-    }, error => console.error(error));
+    }, error => this.toastService.error(error.headers.get('X-cv-error')));
   }
 
   delete() {
     this.usuarioService.delete(this.usuario.id).subscribe(result => {
       this.goToList();
-    }, error => console.error(error));
+    }, error => this.toastService.error(error.headers.get('X-cv-error')));
   }
 }

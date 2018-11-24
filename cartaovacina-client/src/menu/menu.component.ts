@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
           label: 'Vacinas', icon: 'pi pi-fw pi-filter', routerLink: ['/app-vacina'],
         },
         {
-          label: 'Clínicas', icon: 'pi pi-fw pi-home'
+          label: 'Clínicas', icon: 'pi pi-fw pi-home', routerLink: ['/app-clinica']
         },
         ]
       },
