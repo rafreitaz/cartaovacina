@@ -85,6 +85,14 @@ public class ClinicaResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 
+
+    @GetMapping("clinicas/logar/{login}/{senha}")
+    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = {"X-cv-error"})
+    public ResponseEntity<Clinica> logarClinica(@PathVariable("login") String login, @PathVariable("senha") String senha) {
+        Clinica result = clinicaService.recuperaClinicaLogin(login, senha);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public ResponseEntity<?> clinicaExceptionHandler(Exception e) {

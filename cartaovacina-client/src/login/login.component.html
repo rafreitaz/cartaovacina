@@ -1,0 +1,41 @@
+<div class="ui-card" *ngIf="isTelaLogin">
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+    <div class="ui-card-body">
+      <div class="login-wrapper">
+        <div class="login-card">
+
+          <div class="ui-input-m">
+        <span class="ui-float-label">
+          <input id="login" type="text" maxlength="20" [(ngModel)]="acesso.login"
+                 name="loginUsuario" required pInputText>
+          <label for="login">Login</label>
+        </span>
+          </div>
+
+          <div class="ui-input-m">
+        <span class="ui-float-label">
+          <input id="senha" type="password" maxlength="20" [(ngModel)]="acesso.senha"
+                 name="senhaUsuario" required pInputText>
+          <label for="senha">Senha</label>
+        </span>
+          </div>
+
+          <div class="ui-input-m">
+            <p-dropdown [options]="tiposAcesso" [(ngModel)]="acesso.tipoAcesso"
+                        placeholder="Tipo de acesso:" name="tipoAcesso" [required]="true"></p-dropdown>
+          </div>
+
+          <div class="ui-m">
+            <p-button label="Login" styleClass="ui-button-secondary" type="submit"></p-button>
+            <p-button label="Cancelar" styleClass="ui-button-secondary" (onClick)="goToList()" type="button" ></p-button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<app-cartao-vacina [usuario]="usuario" *ngIf="isTelaUsuario" (logoff)="logoff()"></app-cartao-vacina>
+
+<app-aplicacao [clinica]="clinica" *ngIf="isTelaClinica" (logoff)="logoff()"></app-aplicacao>

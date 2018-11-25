@@ -11,6 +11,8 @@ public interface ClinicaService {
 
     Clinica recuperaPeloId(Long id);
 
+    Clinica recuperaClinicaLogin(String login, String senha);
+
     Clinica save(Clinica clinica) throws Exception;
 
     void delete(Long id);

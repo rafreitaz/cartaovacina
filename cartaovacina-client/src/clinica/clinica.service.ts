@@ -32,4 +32,8 @@ export class ClinicaService {
   delete(id: number){
     return this.http.delete(`${this.CLINICAS_API}/${id}`);
   }
+
+  logarClinica(login: string, senha: string) {
+    return this.http.get(`${this.CLINICAS_API}/logar/${login}/${senha}`)
+  }
 }

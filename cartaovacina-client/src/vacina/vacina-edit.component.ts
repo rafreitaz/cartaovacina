@@ -5,7 +5,7 @@ import {VacinaService} from "./vacina.service";
 import {NgForm} from "@angular/forms";
 import {Vacina} from "./vacina.model";
 import {ToastrService} from "ngx-toastr";
-import {Observable} from "rxjs";
+import {BlockUI, NgBlockUI} from 'ng-block-ui';
 
 @Component({
   selector: 'app-vacina-edit',
@@ -16,6 +16,8 @@ export class VacinaEditComponent implements OnInit, OnDestroy {
   vacina: Vacina = new Vacina;
 
   sub: Subscription;
+
+  @BlockUI() blockUI: NgBlockUI;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -28,13 +30,15 @@ export class VacinaEditComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
+        this.blockUI.start("Carregando...")
         this.vacinaService.findOne(id).subscribe((vacina: any) => {
           if (vacina) {
             this.vacina = vacina;
             this.vacina.id = vacina.id;
+            this.blockUI.stop();
           } else {
-            console.log(`Vacina with id '${id}' not found, returning to list`);
-            this.goToList();
+            this.blockUI.stop();
+            this.toastService.error("Erro cao carregar vacina.")
           }
         });
       }
@@ -54,9 +58,14 @@ export class VacinaEditComponent implements OnInit, OnDestroy {
       this.toastService.error("Todos os campos devem ser preenchidos!");
       return;
     }
+    this.blockUI.start("Salvando vacina...")
     this.vacinaService.save(this.vacina).subscribe(result => {
+      this.blockUI.stop();
       this.toastService.success("Vacina salva com sucesso!");
       this.goToList();
-    }, error => this.toastService.error("Erro ao salvar a vacina!"));
+    }, error => {
+      this.blockUI.stop();
+      this.toastService.error("Erro ao salvar a vacina!")
+    });
   }
 }

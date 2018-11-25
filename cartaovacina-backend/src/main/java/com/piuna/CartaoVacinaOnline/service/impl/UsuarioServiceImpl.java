@@ -39,6 +39,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public Usuario recuperaUsuarioLogin(String login, String senha) {
+        return this.usuarioRepository.recuperaUsuarioLogin(login, senha);
+    }
+
+    @Override
     public Usuario save(Usuario usuario) throws Exception {
         validaCPF(usuario.getCpf());
         validaLogin(usuario.getAcesso().getLogin());

@@ -6,14 +6,17 @@ import com.piuna.CartaoVacinaOnline.service.UsuarioService;
 import com.piuna.CartaoVacinaOnline.service.VacinaService;
 import com.piuna.CartaoVacinaOnline.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -86,6 +89,21 @@ public class UsuarioResource {
     public ResponseEntity<Usuario> recuperaPeloCpf(@PathVariable("cpf") String cpf) {
         Usuario result = usuarioService.findOne(cpf);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
+
+    @GetMapping("usuarios/logar/{login}/{senha}")
+    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = {"X-cv-error"})
+    public ResponseEntity<Usuario> logarUsuario(@PathVariable("login") String login, @PathVariable("senha") String senha) {
+        Usuario result = usuarioService.recuperaUsuarioLogin(login, senha);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<?> clinicaExceptionHandler(Exception e) {
+        return ResponseEntity.badRequest()
+                .headers(HeaderUtil.createFailureAlert("Usuário", e.getMessage()))
+                .body(null);
     }
 
 }

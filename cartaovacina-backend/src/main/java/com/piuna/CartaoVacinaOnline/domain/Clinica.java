@@ -35,7 +35,7 @@ public class Clinica {
     private String email;
 
     @NotNull
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "ID_ACESSO")
     private Acesso acesso;
 

@@ -36,6 +36,11 @@ public class ClinicaServiceImpl implements ClinicaService {
     }
 
     @Override
+    public Clinica recuperaClinicaLogin(String login, String senha) {
+        return this.clinicaRepository.recuperaUsuarioLogin(login, senha);
+    }
+
+    @Override
     public Clinica save(Clinica clinica) throws Exception {
         validaCNPJ(clinica.getCnpj());
         validaLogin(clinica.getAcesso().getLogin());

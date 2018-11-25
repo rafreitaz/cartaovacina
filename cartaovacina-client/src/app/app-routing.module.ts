@@ -7,6 +7,9 @@ import {MenuComponent} from "../menu/menu.component";
 import {UsuarioEditComponent} from "../usuario/usuario-edit.component";
 import {ClinicaEditComponent} from "../clinica/clinica-edit.component";
 import {ClinicaComponent} from "../clinica/clinica.component";
+import {AplicacaoComponent} from "../aplicacao/aplicacao.component";
+import {CartaoVacinaComponent} from "../cartao-vacina/cartao-vacina.component";
+import {LoginComponent} from "../login/login.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/app-menu', pathMatch: 'full' },
@@ -41,6 +44,18 @@ const appRoutes: Routes = [
   {
     path: 'app-clinica-edit/:id',
     component: ClinicaEditComponent
+  },
+  {
+    path: 'app-aplicacao',
+    component: AplicacaoComponent
+  },
+  {
+    path: 'app-cartao-vacina',
+    component: CartaoVacinaComponent
+  },
+  {
+    path: 'app-login',
+    component: LoginComponent
   }
 ];
 

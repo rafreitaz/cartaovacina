@@ -1,0 +1,47 @@
+<div class="ui-card">
+  <form #aplicacaoForm="ngForm" (ngSubmit)="save(aplicacaoForm)">
+
+    <div class="ui-card-header">
+      <h2>Registrar aplicação de vacina</h2>
+    </div>
+
+    <div class="ui-card-body">
+
+      <div class="ui-input-m">
+        <span class="ui-float-label">
+          <p-inputMask id="cpfUsuario" type="text" maxlength="15" [(ngModel)]="aplicacao.usuario.cpf"
+                       name="cpfusuario" mask="999.999.999-99" required></p-inputMask>
+          <label for="cpfUsuario">CPF</label>
+        </span>
+        <p-button label="Procurar" styleClass="ui-button-info" (onClick)="procurarUsuario()"
+                  [disabled]="!cpfValido()" type="button"></p-button>
+        <p-button label="Limpar" styleClass="ui-button-info" (onClick)="limparCpf()"
+                  [disabled]="!aplicacao.usuario.cpf" type="button"></p-button>
+      </div>
+
+      <div class="ui-input-m">
+        <span class="ui-float-label">
+          <input id="nome" type="text" maxlength="150" size="65" [(ngModel)]="aplicacao.usuario.nome"
+                 name="nomeusuario" pInputText readonly>
+          <label for="nome">Nome</label>
+        </span>
+      </div>
+
+      <div class="ui-input-m">
+        <p-dropdown [options]="vacinas" [(ngModel)]="aplicacao.vacina.id" [filter]="true" placeholder="Escolha a vacina:" name="vacina" [required]="true"></p-dropdown>
+      </div>
+
+      <div class="ui-input-m">
+        <p-calendar [(ngModel)]="aplicacao.dataAplicacao" dateFormat="dd/mm/yy" [locale]="pt"
+                    [showIcon]="true" name="dataAplicacao" [maxDate]="dataMaxima"></p-calendar>
+      </div>
+
+      <div class="ui-m">
+        <p-button label="Salvar" styleClass="ui-button-info" type="submit"></p-button>
+        <p-button label="Fazer LogOff" styleClass="ui-button-info" (onClick)="fazerLogoff()" type="button"></p-button>
+      </div>
+
+    </div>
+
+  </form>
+</div>

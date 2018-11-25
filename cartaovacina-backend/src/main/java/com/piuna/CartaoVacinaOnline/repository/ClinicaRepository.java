@@ -20,4 +20,10 @@ public interface ClinicaRepository extends JpaRepository<Clinica, Long> {
 
     @Query("SELECT c FROM Clinica c WHERE c.id = :id")
     Clinica recuperaPeloId(@Param("id") Long id);
+
+    @Query("SELECT c FROM Clinica c " +
+            "JOIN c.acesso a " +
+            "WHERE a.login LIKE :login " +
+            "AND a.senha LIKE :senha")
+    Clinica recuperaUsuarioLogin(@Param("login") String login, @Param("senha") String senha);
 }
