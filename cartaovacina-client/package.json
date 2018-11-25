@@ -25,6 +25,7 @@
     "@brazilian-utils/is-valid-cnpj": "^0.1.11",
     "@brazilian-utils/is-valid-cpf": "^0.1.11",
     "core-js": "^2.5.4",
+    "ng-block-ui": "^2.0.0",
     "ng-cpf-cnpj-validate": "^1.0.2",
     "ngx-toastr": "^9.1.1",
     "primeicons": "^1.0.0",
