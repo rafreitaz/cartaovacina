@@ -27,4 +27,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
             "WHERE a.login LIKE :login " +
             "AND a.senha LIKE :senha")
     Usuario recuperaUsuarioLogin(@Param("login") String login, @Param("senha") String senha);
+
+    @Query("SELECT u.nome FROM Usuario u WHERE u.id = :id")
+    String getNomePeloId(@Param("id") Long id);
 }

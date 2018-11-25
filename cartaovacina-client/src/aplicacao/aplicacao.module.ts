@@ -12,6 +12,7 @@ import {UsuarioService} from "../usuario/usuario.service";
 import {DropdownModule} from 'primeng/dropdown';
 import {VacinaService} from "../vacina/vacina.service";
 import {CalendarModule} from 'primeng/calendar';
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import {CalendarModule} from 'primeng/calendar';
     TableModule,
     InputMaskModule,
     DropdownModule,
-    CalendarModule
+    CalendarModule,
+    HttpModule,
   ],
   providers: [AplicacaoService, UsuarioService, VacinaService],
   exports: [AplicacaoComponent],

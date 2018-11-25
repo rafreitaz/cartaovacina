@@ -12,10 +12,26 @@ import com.piuna.CartaoVacinaOnline.repository.ClinicaRepository;
 import com.piuna.CartaoVacinaOnline.repository.UsuarioRepository;
 import com.piuna.CartaoVacinaOnline.repository.VacinaRepository;
 import com.piuna.CartaoVacinaOnline.service.AplicacaoService;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,6 +77,20 @@ public class AplicacaoServiceImpl implements AplicacaoService {
         this.aplicacaoRepository.deleteById(id);
     }
 
+    public byte[] generatePDFReport(Long idUsuario) throws JRException {
+        byte[] bytes = null;
+        Map<String, Object> params = new HashMap<>();
+        params.put("aplicacaoDataSource", new JRBeanCollectionDataSource(this.getAll(idUsuario)));
+        params.put("nomeUsuario", this.usuarioRepository.getNomePeloId(idUsuario));
+
+        InputStream jasperStream = this.getClass().getResourceAsStream("/jasperReports/cartao_vacina.jasper");
+        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, new JREmptyDataSource());
+        bytes = JasperExportManager.exportReportToPdf(jasperPrint);
+
+        return bytes;
+    }
+
     private void preProcessSave(AplicacaoVacina aplicacao) {
         Usuario usuario = usuarioRepository.recuperaPeloId(aplicacao.getUsuario().getId());
         Vacina vacina = vacinaRepository.recuperaPeloId(aplicacao.getVacina().getId());
@@ -76,4 +106,5 @@ public class AplicacaoServiceImpl implements AplicacaoService {
             throw new Exception("Já existe um registro da vacina selecionada para o usuário.");
         }
     }
+
 }

@@ -1,6 +1,7 @@
 package com.piuna.CartaoVacinaOnline.dto;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class AplicacaoVacinaDTO {
 
@@ -64,5 +65,10 @@ public class AplicacaoVacinaDTO {
 
     public void setDataAplicacao(LocalDate dataAplicacao) {
         this.dataAplicacao = dataAplicacao;
+    }
+
+    public String getDataAplicacaoStr() {
+        return this.dataAplicacao.format(
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 }

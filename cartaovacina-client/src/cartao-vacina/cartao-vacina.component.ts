@@ -5,6 +5,7 @@ import {ToastrService} from "ngx-toastr";
 import {AplicacaoListagem} from "./aplicacao-listagem.model";
 import {AplicacaoService} from "../aplicacao/aplicacao.service";
 import {Usuario} from "../usuario/usuario.model";
+import { saveAs } from 'file-saver'
 import {BlockUI, NgBlockUI} from 'ng-block-ui';
 
 
@@ -69,6 +70,21 @@ export class CartaoVacinaComponent implements OnInit {
 
   fazerLogoff() {
     this.logoff.emit();
+  }
+
+
+  download() {
+    this.blockUI.start( "Buscando relatório..." );
+    this.aplicacaoService.downloadPdf(this.usuario.id).then(
+      res => {
+        saveAs (res, 'cartao_vacina.pdf');
+        this.blockUI.stop();
+      },
+      err => {
+        this.toastService.error( "Erro ao gerar arquivo." );
+        this.blockUI.stop();
+      }
+    );
   }
 
 }

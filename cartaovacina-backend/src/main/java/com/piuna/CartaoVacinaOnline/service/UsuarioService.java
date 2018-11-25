@@ -19,4 +19,6 @@ public interface UsuarioService {
 
     void delete(Long id);
 
+    String getNomePeloId(Long id);
+
 }

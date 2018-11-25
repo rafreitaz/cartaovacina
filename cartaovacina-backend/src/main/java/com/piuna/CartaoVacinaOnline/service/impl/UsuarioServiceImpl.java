@@ -57,6 +57,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.usuarioRepository.deleteById(id);
     }
 
+    @Override
+    public String getNomePeloId(Long id) {
+        return this.usuarioRepository.getNomePeloId(id);
+    }
+
     private Acesso preProcessAcesso(Usuario usuario) {
         Acesso acesso = new Acesso();
         acesso.setLogin(usuario.getAcesso().getLogin());
