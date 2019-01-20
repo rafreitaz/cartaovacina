@@ -118,7 +118,9 @@ export class AplicacaoComponent implements OnInit, OnDestroy {
   }
 
   limpaAplicacao() {
+    var usuario = this.aplicacao.usuario;
     this.aplicacao = new Aplicacao();
+    this.aplicacao.usuario = usuario;
     this.aplicacao.clinica = this.clinica;
     this.aplicacao.vacina = new Vacina();
     this.aplicacao.dataAplicacao = new Date();

@@ -26,8 +26,7 @@ export class ClinicaComponent implements OnInit {
 
     this.cols = [
       { field: 'nome', header: 'Nome' },
-      { field: 'cnpj', header: 'CNPJ' },
-      { field: 'acesso.login', header: 'Login' }
+      { field: 'cnpj', header: 'CNPJ' }
     ];
   }
 

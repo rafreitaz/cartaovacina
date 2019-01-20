@@ -4,6 +4,11 @@
     <h2>Lista de Vacinas</h2>
   </div>
 
+  <div class="ui-card-header">
+    <h3>{{usuario.nome}}</h3>
+    <h5>CPF: {{usuario.cpf}}</h5>
+  </div>
+
   <div class="ui-card-body">
     <div class="ui-m" style="width: 750px">
       <p-table [columns]="cols" [value]="aplicacoes"
