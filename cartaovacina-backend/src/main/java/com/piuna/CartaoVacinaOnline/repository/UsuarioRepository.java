@@ -21,4 +21,13 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     @Query("SELECT u FROM Usuario u WHERE u.id = :id")
     Usuario recuperaPeloId(@Param("id") Long id);
+
+    @Query("SELECT u FROM Usuario u " +
+            "JOIN u.acesso a " +
+            "WHERE a.login LIKE :login " +
+            "AND a.senha LIKE :senha")
+    Usuario recuperaUsuarioLogin(@Param("login") String login, @Param("senha") String senha);
+
+    @Query("SELECT u.nome FROM Usuario u WHERE u.id = :id")
+    String getNomePeloId(@Param("id") Long id);
 }

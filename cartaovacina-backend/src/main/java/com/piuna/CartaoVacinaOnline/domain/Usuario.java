@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -32,10 +34,16 @@ public class Usuario {
     @Column(name = "EMAIL")
     private String email;
 
-    public Usuario(String nome, String cpf, String email) {
+    @NotNull
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(name = "ID_ACESSO")
+    private Acesso acesso;
+
+    public Usuario(String nome, String cpf, String email, Acesso acesso) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
+        this.acesso = acesso;
     }
 
     public Usuario() {
@@ -72,5 +80,13 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Acesso getAcesso() {
+        return acesso;
+    }
+
+    public void setAcesso(Acesso acesso) {
+        this.acesso = acesso;
     }
 }

@@ -1,23 +1,22 @@
 package com.piuna.CartaoVacinaOnline.resource;
 
-/**
- * Resources são classes que recebem a chamada do frontEnd e executam algum metodo.
- */
-
 import com.piuna.CartaoVacinaOnline.domain.Usuario;
 import com.piuna.CartaoVacinaOnline.domain.Vacina;
 import com.piuna.CartaoVacinaOnline.service.UsuarioService;
 import com.piuna.CartaoVacinaOnline.service.VacinaService;
 import com.piuna.CartaoVacinaOnline.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -40,13 +39,13 @@ public class UsuarioResource {
      * @return uma lista de todas as vacinas
      */
     @GetMapping("/usuarios")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = {"X-cv-error"})
     public List<Usuario> getAll(){
         return usuarioService.getAll();
     }
 
     @PutMapping("/usuarios")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = {"X-cv-error"})
     public ResponseEntity<Usuario> updateUsuario(@Valid @RequestBody Usuario usuario)
             throws Exception {
         if (usuario.getId() == null) {
@@ -59,7 +58,7 @@ public class UsuarioResource {
     }
 
     @PostMapping("/usuarios")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = {"X-cv-error"})
     public ResponseEntity<Usuario> createUsuario(@Valid @RequestBody Usuario usuario)
             throws Exception {
         if (usuario.getId() != null) {
@@ -72,24 +71,39 @@ public class UsuarioResource {
     }
 
     @DeleteMapping("/usuarios/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<Vacina> deleteUsuario(@PathVariable("id") Long id) {
+    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = {"X-cv-error"})
+    public ResponseEntity<Usuario> deleteUsuario(@PathVariable("id") Long id) {
         this.usuarioService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("Usuario", id.toString())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("Usuário", id.toString())).build();
     }
 
     @GetMapping("usuarios/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = {"X-cv-error"})
     public ResponseEntity<Usuario> findOne(@PathVariable("id") Long id) {
         Usuario result = usuarioService.recuperaPeloId(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 
     @GetMapping("usuarios/cpf/{cpf}")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = {"X-cv-error"})
     public ResponseEntity<Usuario> recuperaPeloCpf(@PathVariable("cpf") String cpf) {
         Usuario result = usuarioService.findOne(cpf);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
+
+    @GetMapping("usuarios/logar/{login}/{senha}")
+    @CrossOrigin(origins = "http://localhost:4200", exposedHeaders = {"X-cv-error"})
+    public ResponseEntity<Usuario> logarUsuario(@PathVariable("login") String login, @PathVariable("senha") String senha) {
+        Usuario result = usuarioService.recuperaUsuarioLogin(login, senha);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<?> clinicaExceptionHandler(Exception e) {
+        return ResponseEntity.badRequest()
+                .headers(HeaderUtil.createFailureAlert("Usuário", e.getMessage()))
+                .body(null);
     }
 
 }

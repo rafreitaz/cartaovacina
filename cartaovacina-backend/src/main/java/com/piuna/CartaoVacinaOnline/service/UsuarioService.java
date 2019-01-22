@@ -13,8 +13,12 @@ public interface UsuarioService {
 
     Usuario recuperaPeloId(Long id);
 
-    Usuario save(Usuario usuario);
+    Usuario recuperaUsuarioLogin(String login, String senha);
+
+    Usuario save(Usuario usuario) throws Exception;
 
     void delete(Long id);
+
+    String getNomePeloId(Long id);
 
 }

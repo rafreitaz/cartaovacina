@@ -1,0 +1,39 @@
+<div class="ui-card">
+
+  <div class="ui-card-header">
+    <h2>Lista de Vacinas</h2>
+  </div>
+
+  <div class="ui-card-header">
+    <h3>{{usuario.nome}}</h3>
+    <h5>CPF: {{usuario.cpf}}</h5>
+  </div>
+
+  <div class="ui-card-body">
+    <div class="ui-m" style="width: 750px">
+      <p-table [columns]="cols" [value]="aplicacoes"
+               [resizableColumns]="true">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns" pResizableColumn>
+              {{col.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns" class="ui-resizable-column">
+              {{rowData[col.field]}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div class="ui-m">
+    <p-button label="Gerar PDF" styleClass="ui-button-info" type="button" (onClick)="download()"></p-button>
+    <p-button label="Sair" styleClass="ui-button-info" (onClick)="fazerLogoff()"></p-button>
+  </div>
+
+</div>

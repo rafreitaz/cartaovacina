@@ -31,6 +31,22 @@
         </span>
       </div>
 
+      <div class="ui-input-m">
+        <span class="ui-float-label">
+          <input id="login" type="text" maxlength="20" [(ngModel)]="usuario.acesso.login"
+                       name="loginUsuario" required pInputText>
+          <label for="login">Login</label>
+        </span>
+      </div>
+
+      <div class="ui-input-m">
+        <span class="ui-float-label">
+          <input id="senha" type="password" maxlength="20" [(ngModel)]="usuario.acesso.senha"
+                       name="senhaUsuario" required pInputText>
+          <label for="senha">Senha</label>
+        </span>
+      </div>
+
       <div class="ui-m">
         <p-button label="Salvar" styleClass="ui-button-info" type="submit"></p-button>
         <p-button label="Cancelar" styleClass="ui-button-info" (onClick)="goToList()"></p-button>

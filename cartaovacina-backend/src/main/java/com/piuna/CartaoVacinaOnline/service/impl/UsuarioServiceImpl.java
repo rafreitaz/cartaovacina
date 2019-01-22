@@ -1,11 +1,10 @@
 package com.piuna.CartaoVacinaOnline.service.impl;
 
+import com.piuna.CartaoVacinaOnline.domain.Acesso;
 import com.piuna.CartaoVacinaOnline.domain.Usuario;
-import com.piuna.CartaoVacinaOnline.domain.Vacina;
+import com.piuna.CartaoVacinaOnline.repository.AcessoRepository;
 import com.piuna.CartaoVacinaOnline.repository.UsuarioRepository;
-import com.piuna.CartaoVacinaOnline.repository.VacinaRepository;
 import com.piuna.CartaoVacinaOnline.service.UsuarioService;
-import com.piuna.CartaoVacinaOnline.service.VacinaService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +16,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+    private final AcessoRepository acessoRepository;
+
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, AcessoRepository acessoRepository) {
         this.usuarioRepository = usuarioRepository;
+        this.acessoRepository = acessoRepository;
     }
 
     @Override
@@ -37,12 +39,46 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario save(Usuario usuario) {
+    public Usuario recuperaUsuarioLogin(String login, String senha) {
+        return this.usuarioRepository.recuperaUsuarioLogin(login, senha);
+    }
+
+    @Override
+    public Usuario save(Usuario usuario) throws Exception {
+        validaCPF(usuario.getCpf());
+        validaLogin(usuario.getAcesso().getLogin());
+        Acesso acesso = preProcessAcesso(usuario);
+        usuario.setAcesso(acesso);
         return this.usuarioRepository.save(usuario);
     }
 
     @Override
     public void delete(Long id) {
         this.usuarioRepository.deleteById(id);
+    }
+
+    @Override
+    public String getNomePeloId(Long id) {
+        return this.usuarioRepository.getNomePeloId(id);
+    }
+
+    private Acesso preProcessAcesso(Usuario usuario) {
+        Acesso acesso = new Acesso();
+        acesso.setLogin(usuario.getAcesso().getLogin());
+        acesso.setSenha(usuario.getAcesso().getSenha());
+        acesso.setTipoAcesso("U");
+        return this.acessoRepository.save(acesso);
+    }
+
+    private void validaLogin(String login) throws Exception {
+        if (this.acessoRepository.recuperaCountLogin(login) != 0) {
+            throw new Exception("Login informado já existe. Favor escolher outro.");
+        }
+    }
+
+    private void validaCPF(String cpf) throws Exception {
+        if (this.usuarioRepository.recuperaPeloCpf(cpf) != null) {
+            throw new Exception("Já existe usuário cadastrado com o CPF informado!");
+        }
     }
 }

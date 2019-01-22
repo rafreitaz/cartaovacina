@@ -16,7 +16,7 @@ export class UsuarioService {
   }
 
   findOne(cpf: string){
-    return this.http.get(`${this.USUARIOS_API}/${cpf}`)
+    return this.http.get(`${this.USUARIOS_API}/cpf/${cpf}`)
   }
 
   save(usuario: Usuario): Observable<any> {
@@ -31,5 +31,9 @@ export class UsuarioService {
 
   delete(id: number){
     return this.http.delete(`${this.USUARIOS_API}/${id}`);
+  }
+
+  logarUsuario(login: string, senha: string) {
+    return this.http.get(`${this.USUARIOS_API}/logar/${login}/${senha}`)
   }
 }

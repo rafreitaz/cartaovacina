@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
           label: 'Vacinas', icon: 'pi pi-fw pi-filter', routerLink: ['/app-vacina'],
         },
         {
-          label: 'Clínicas', icon: 'pi pi-fw pi-home'
+          label: 'Clínicas', icon: 'pi pi-fw pi-home', routerLink: ['/app-clinica']
         },
         ]
       },
@@ -30,15 +30,12 @@ export class MenuComponent implements OnInit {
         items: [{
           label: 'Cadastrar', icon: 'pi pi-fw pi-user-plus', routerLink: ['/app-usuario-edit'],
         },
-          {
-            label: 'Vizualizar cartão', icon: 'pi pi-fw pi-list'
-          },
         ]
       },
       {
-        label: 'Clínica', icon: 'pi pi-pw pi-home',
+        label: 'Login', icon: 'pi pi-pw pi-home',
         items: [{
-          label: 'Cadastrar aplicação de vacina', icon: 'pi pi-fw pi-calendar-plus',
+          label: 'Fazer login', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/app-login']
         },
         ]
       },

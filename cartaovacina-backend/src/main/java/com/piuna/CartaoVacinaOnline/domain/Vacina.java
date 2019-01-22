@@ -1,10 +1,5 @@
 package com.piuna.CartaoVacinaOnline.domain;
 
-/**
- * NOTA: Todos os objetos comuns que usaremos ficarão no pacote "domain"
- * Para maior organização vamos utilizar um pacote diferente pra cada tipo de objeto
- */
-
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.id.IncrementGenerator;
@@ -13,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
