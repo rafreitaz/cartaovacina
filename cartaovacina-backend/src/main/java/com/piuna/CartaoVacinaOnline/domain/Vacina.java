@@ -34,8 +34,10 @@ public class Vacina {
     }
 
     public Vacina() {
-        //Construtor vazio
+
     }
+
+
 
     public Long getId() {
         return id;
